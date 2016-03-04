@@ -32,6 +32,18 @@ public class adminController {
 		return "admin";
 	}
 	
+	@RequestMapping("/listado")
+	public String showAdmins(Model model, @ModelAttribute("resultado") String resultado)
+	{
+		List<Admin> admins=adminService.finAll();
+		
+		Admin admin = new Admin();
+		model.addAttribute("admin", admin);
+		model.addAttribute("resultado",resultado);
+		model.addAttribute("admins",admins);
+		return "listado";
+	}
+	
 	@RequestMapping(value="/admin/save", method=RequestMethod.POST)
 	public String handleAdmin(@ModelAttribute("admin") Admin adminform, 
 			Model model, RedirectAttributes rd )
@@ -44,12 +56,8 @@ public class adminController {
 		{
 			rd.addFlashAttribute("resultado", "Error al realizar los cambios");
 		}
-		
-		
 		return "redirect:/admin";
-	}
-	/*/admin/${admin.idAd}/delete" */
-	
+	}	
 	@RequestMapping("/admin/{idAd}/update")
 	public String ShowUpdate(Model model, @PathVariable("idAd") int id)
 	{
@@ -57,7 +65,6 @@ public class adminController {
 		model.addAttribute("admin",admin);
 		return "admin";
 	}
-	
 	@RequestMapping("/admin/{idAd}/delete")
 	public String delete(@PathVariable("idAd") int idAd,
 			RedirectAttributes ra)
@@ -72,6 +79,4 @@ public class adminController {
 		 }
 		return "redirect:/admin";
 	}
-	
-	
 }

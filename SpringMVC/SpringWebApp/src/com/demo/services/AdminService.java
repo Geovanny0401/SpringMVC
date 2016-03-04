@@ -18,12 +18,9 @@ public class AdminService {
 	public AdminDao adminDao;
 	
 	public boolean save(Admin admin)
-	{
-		
-		admin.setFechaCreacion(new Timestamp(new Date().getTime()));
-		
+	{		
+		admin.setFechaCreacion(new Timestamp(new Date().getTime()));	
 		return adminDao.save(admin);
-		
 	}
 	
 	public List<Admin> finAll()
@@ -33,28 +30,22 @@ public class AdminService {
 	
 	public Admin FinById(int id)
 	{
-		return adminDao.findById(id);
-		
+		return adminDao.findById(id);		
 	}
 
 	public boolean SaveOrUpdate(Admin admin) {
-		// TODO Auto-generated method stub
 		if(admin.getIdAd()==0)
 		{
 			//Insert
 			admin.setFechaCreacion(new Timestamp(new Date().getTime()));
 			return adminDao.save(admin);	
-			
 		}
 		else
 		{
 			//Update
 			return adminDao.update(admin);
-			
 		}
-		
 	}
-
 	public boolean delete(int idAd) {
 		// TODO Auto-generated method stub
 		return adminDao.delete(idAd);
